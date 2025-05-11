@@ -1,17 +1,13 @@
 #!/usr/bin/python3
-import marshal
-
 if __name__ == "__main__":
-    try:
-        with open("/tmp/hidden_4.pyc", "rb") as f:
-            f.read(8)
-            code = marshal.load(f)
+    import hidden_4
 
-        names = sorted(
-            [name for name in code.co_names if not name.startswith("__")]
-        )
-        for name in names:
-            print(name)
+    # Obtenir tous les noms définis dans le module hidden_4
+    all_names = dir(hidden_4)
 
-    except FileNotFoundError:
-        pass
+    # Filtrer les noms qui ne commencent pas par __
+    filtered_names = [name for name in all_names if not name.startswith("__")]
+
+    # Trier en ordre alphabétique et imprimer chaque nom sur une nouvelle ligne
+    for name in sorted(filtered_names):
+        print(name)
