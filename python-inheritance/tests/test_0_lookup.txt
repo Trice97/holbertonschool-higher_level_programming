@@ -1,9 +1,77 @@
 Test pour la fonction lookup.
 
->>> from 0-lookup import lookup
->>> class MyClass:
-...     pass
-...
->>> lookup(MyClass)
-['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__']
+    >>> lookup = __import__('0-lookup').lookup
 
+Test with a simple class without attributes:
+
+    >>> class MyClass1(object):
+    ...     pass
+    >>> result = lookup(MyClass1)
+    >>> type(result)
+    <class 'list'>
+    >>> '__class__' in result
+    True
+    >>> '__init__' in result
+    True
+
+Test with a class that has attributes and methods:
+
+    >>> class MyClass2(object):
+    ...     my_attr1 = 3
+    ...     def my_meth(self):
+    ...         pass
+    >>> result = lookup(MyClass2)
+    >>> 'my_attr1' in result
+    True
+    >>> 'my_meth' in result
+    True
+    >>> '__class__' in result
+    True
+
+Test with built-in types:
+
+    >>> result = lookup(int)
+    >>> type(result)
+    <class 'list'>
+    >>> '__add__' in result
+    True
+    >>> 'bit_length' in result
+    True
+
+Test with an instance of a class:
+
+    >>> class TestClass:
+    ...     attr = "test"
+    ...     def method(self):
+    ...         return "hello"
+    >>> obj = TestClass()
+    >>> result = lookup(obj)
+    >>> 'attr' in result
+    True
+    >>> 'method' in result
+    True
+
+Test with built-in objects:
+
+    >>> result = lookup([1, 2, 3])
+    >>> 'append' in result
+    True
+    >>> 'pop' in result
+    True
+
+Test with string:
+
+    >>> result = lookup("hello")
+    >>> 'upper' in result
+    True
+    >>> 'lower' in result
+    True
+
+Test return type is always a list:
+
+    >>> type(lookup({}))
+    <class 'list'>
+    >>> type(lookup(42))
+    <class 'list'>
+    >>> type(lookup(lambda x: x))
+    <class 'list'>
