@@ -1,0 +1,32 @@
+import unittest
+from 1-my_list import MyList
+
+class TestMyList(unittest.TestCase):
+    def setUp(self):
+        """Set up test fixtures, if any."""
+        self.my_list = MyList()
+        self.my_list.append(3)
+        self.my_list.append(1)
+        self.my_list.append(4)
+        self.my_list.append(2)
+
+    def test_print_sorted(self):
+        """Test that print_sorted prints the sorted list."""
+        # Redirect stdout to capture the print output
+        import io
+        import sys
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+
+        self.my_list.print_sorted()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(captured_output.getvalue().strip(), "[1, 2, 3, 4]")
+
+    def test_list_unchanged(self):
+        """Test that the original list remains unchanged after print_sorted."""
+        original_list = self.my_list.copy()
+        self.my_list.print_sorted()
+        self.assertEqual(self.my_list, original_list)
+
+if __name__ == '__main__':
+    unittest.main()
