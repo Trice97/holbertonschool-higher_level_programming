@@ -2,6 +2,6 @@
 """Module about an emply class"""
 
 
-class Basegeometry:
-    """function regarding an empty class named basegeometry"""
+class BaseGeometry:
+    """""Empty BaseGeometry class."""
     pass
