@@ -1,39 +1,26 @@
 #!/usr/bin/python3
-"""Module contenant la classe BaseGeometry avec validation d'entiers."""
+"""Module for BaseGeometry class."""
 
 
 class BaseGeometry:
-    """Classe de base pour la géométrie."""
+    """A base class for geometric calculations."""
 
     def area(self):
-        """Méthode à implémenter dans les classes filles."""
+        """Calculate the area - not implemented in base class."""
         raise Exception("area() is not implemented")
 
     def integer_validator(self, name, value):
-        """
-        Valide que value est un entier > 0.
+        """Validate that value is a positive integer.
 
         Args:
-            name (str): le nom du paramètre.
-            value (int): la valeur à valider.
+            name (str): Name of the parameter being validated.
+            value: Value to validate.
 
         Raises:
-            TypeError: si value n'est pas un int.
-            ValueError: si value <= 0.
-
-        Examples:
-            >>> bg = BaseGeometry()
-            >>> bg.integer_validator("width", 10)
-            >>> bg.integer_validator("width", "10")
-            Traceback (most recent call last):
-            ...
-            TypeError: width must be an integer
-            >>> bg.integer_validator("width", 0)
-            Traceback (most recent call last):
-            ...
-            ValueError: width must be greater than 0
+            TypeError: If value is not an integer.
+            ValueError: If value is less than or equal to 0.
         """
         if type(value) is not int:
-            raise TypeError(f"{name} must be an integer")
+            raise TypeError("{} must be an integer".format(name))
         if value <= 0:
-            raise ValueError(f"{name} must be greater than 0")
+            raise ValueError("{} must be greater than 0".format(name))
