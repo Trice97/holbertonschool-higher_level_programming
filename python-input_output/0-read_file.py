@@ -4,6 +4,6 @@
 
 def read_file(filename=""):
     """ Function allowing the reading of the file"""
-i
+
     with open(filename, encoding="utf-8") as my_file:
         print(my_file.read())
