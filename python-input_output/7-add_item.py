@@ -1,17 +1,26 @@
 #!/usr/bin/python3
-"""Module that load, Add, save"""
+"""Defines a base geometry class BaseGeometry."""
 
 
-import json
-import sys
+class BaseGeometry:
+    """Represents the base geometry class."""
 
-save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
-load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
+    def area(self):
+        """Raises an exception because the method is not implemented yet."""
+        raise Exception("area() is not implemented")
 
+    def integer_validator(self, name, value):
+        """Validates that value is a positive integer.
 
-filename = "add_item.json"
-with open(filename, a+, encoding="utf-8") as f:
-    my_list = []
-    my_list.append(args[1:])
-    save_to_json_file(my_list, filename)
-    load_from_json_file(filename)
+        Args:
+            name (str): name of the parameter.
+            value (int): value to validate.
+
+        Raises:
+            TypeError: if value is not an integer.
+            ValueError: if value is less than or equal to 0.
+        """
+        if type(value) is not int:
+            raise TypeError("{} must be an integer".format(name))
+        if value <= 0:
+            raise ValueError("{} must be greater than 0".format(name))
