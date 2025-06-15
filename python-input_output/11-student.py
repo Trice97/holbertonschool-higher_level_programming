@@ -23,7 +23,8 @@ class Student:
         if attrs is None:
             return self.__dict__
 
-        if isinstance(attrs, list) and all(isinstance(attr, str) for attr in attrs):
+        if (isinstance(attrs, list) and
+                all(isinstance(attr, str) for attr in attrs)):
             result = {}
             for attr in attrs:
                 if hasattr(self, attr):

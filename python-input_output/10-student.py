@@ -16,13 +16,15 @@ class Student:
 
         Args:
             attrs: List of attribute names to retrieve. If None, retrieves all.
+
         Returns:
             Dictionary representation of the student
         """
         if attrs is None:
             return self.__dict__
 
-        if isinstance(attrs, list) and all(isinstance(attr, str) for attr in attrs):
+        if (isinstance(attrs, list) and
+                all(isinstance(attr, str) for attr in attrs)):
             result = {}
             for attr in attrs:
                 if hasattr(self, attr):
