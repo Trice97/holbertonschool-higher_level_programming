@@ -8,24 +8,53 @@ def generate_invitations(template, attendees):
         print("Error: Attendees must be a list")
         return
     
-    # Check if attendees is a list of dictionaries
     for attendee in attendees:
         if not isinstance(attendee, dict):
             print("Error: Each attendee must be a dictionary")
             return
     
-    print("Types validation passed!")
+    # Step 2: Check if empty
+    if not template:
+        print("Template is empty, no output files generated.")
+        return
     
-    # Step 2: Check if empty (to be filled next)
-    print("Checking if empty...")
-
-# Test with different types
-if __name__ == "__main__":
-    print("=== Test 1: Valid inputs ===")
-    generate_invitations("Hello {name}", [{"name": "Alice"}])
+    if not attendees:
+        print("No data provided, no output files generated.")
+        return
     
-    print("\n=== Test 2: Invalid template ===")
-    generate_invitations(123, [{"name": "Alice"}])
-    
-    print("\n=== Test 3: Invalid attendees ===")
-    generate_invitations("Hello {name}", "not a list")
+    # Step 3: Process each attendee
+    for index, attendee in enumerate(attendees, start=1):
+        # Create a copy of the template
+        invitation = template
+        
+        # Replace placeholders with attendee data
+        # Handle missing data by replacing with "N/A"
+        name = attendee.get('name', 'N/A')
+        event_title = attendee.get('event_title', 'N/A')
+        event_date = attendee.get('event_date', 'N/A')
+        event_location = attendee.get('event_location', 'N/A')
+        
+        # Handle None values
+        if name is None:
+            name = 'N/A'
+        if event_title is None:
+            event_title = 'N/A'
+        if event_date is None:
+            event_date = 'N/A'
+        if event_location is None:
+            event_location = 'N/A'
+        
+        # Replace placeholders
+        invitation = invitation.replace('{name}', str(name))
+        invitation = invitation.replace('{event_title}', str(event_title))
+        invitation = invitation.replace('{event_date}', str(event_date))
+        invitation = invitation.replace('{event_location}', str(event_location))
+        
+        # Step 4: Create output file
+        filename = f"output_{index}.txt"
+        try:
+            with open(filename, 'w') as file:
+                file.write(invitation)
+            print(f"Created {filename}")
+        except Exception as e:
+            print(f"Error creating {
