@@ -22,15 +22,13 @@ def generate_invitations(template, attendees):
         print("No data provided, no output files generated.")
         return
     
-    # Step 3: Process each attendee
+    # Step 3 & 4: Process and create files
     for index, attendee in enumerate(attendees, start=1):
-        # Create a copy of the template
         invitation = template
         
-        # Replace placeholders with attendee data
-        # Handle missing data by replacing with "N/A"
+        # Get values with default "N/A"
         name = attendee.get('name', 'N/A')
-        event_title = attendee.get('event_title', 'N/A')
+        event_title = attendee.get('event_title', 'N/A') 
         event_date = attendee.get('event_date', 'N/A')
         event_location = attendee.get('event_location', 'N/A')
         
@@ -50,11 +48,7 @@ def generate_invitations(template, attendees):
         invitation = invitation.replace('{event_date}', str(event_date))
         invitation = invitation.replace('{event_location}', str(event_location))
         
-        # Step 4: Create output file
+        # Create file
         filename = f"output_{index}.txt"
-        try:
-            with open(filename, 'w') as file:
-                file.write(invitation)
-            print(f"Created {filename}")
-        except Exception as e:
-            print(f"Error creating {
+        with open(filename, 'w') as file:
+            file.write(invitation)
