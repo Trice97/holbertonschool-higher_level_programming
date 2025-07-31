@@ -1,2 +1,11 @@
 #!/usr/bin/node
-console.log(process.argv[2] === undefined ? 'no argument' : process.argv[2]);
+
+// Récupère le premier argument passé (après le nom du script)
+const arg = process.argv[2];
+
+// Vérifie si l'argument existe
+if (arg === undefined) {
+  console.log('No argument');
+} else {
+  console.log(arg);
+}
