@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 // Récupère l'argument de la ligne de commande et le convertit en entier
 const x = parseInt(process.argv[2]);
 // Vérifie si la conversion a échoué
